@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group = 'com.example'
+version = '1.0.0'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.amazonaws:aws-lambda-java-core:1.2.3'
+    implementation 'com.amazonaws:aws-lambda-java-events:3.11.4'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.1'
+
+    testImplementation platform('org.junit:junit-bom:5.10.2')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+shadowJar {
+    archiveBaseName.set('user-service-lambda')
+    archiveClassifier.set('all')
+    archiveVersion.set('')
+    // Resulting artifact: build/libs/user-service-lambda-all.jar
+}
+
+// Make `build` produce the deployable fat JAR for Terraform.
+build.dependsOn shadowJar
