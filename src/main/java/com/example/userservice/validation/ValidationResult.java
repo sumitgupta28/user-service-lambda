@@ -1,5 +1,8 @@
 package com.example.userservice.validation;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -7,6 +10,7 @@ import java.util.List;
  * Outcome of validating a {@link com.example.userservice.model.User}.
  * Carries the overall validity flag plus every error encountered (not just the first).
  */
+@Getter
 public final class ValidationResult {
 
     private final boolean valid;
@@ -21,11 +25,4 @@ public final class ValidationResult {
         return new ValidationResult(errors.isEmpty(), errors);
     }
 
-    public boolean isValid() {
-        return valid;
-    }
-
-    public List<String> getErrors() {
-        return errors;
-    }
 }

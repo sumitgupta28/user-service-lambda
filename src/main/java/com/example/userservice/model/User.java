@@ -2,6 +2,11 @@ package com.example.userservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Incoming user payload received in the API Gateway request body.
@@ -10,50 +15,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * (and reported as a validation error) rather than silently defaulting to 0.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Setter
+@Getter
 public class User {
 
-    private String name;
-    private String email;
-    private Integer age;
-
-    public User() {
-    }
-
-    public User(String name, String email, Integer age) {
-        this.name = name;
-        this.email = email;
-        this.age = age;
-    }
-
     @JsonProperty("name")
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    private String name;
     @JsonProperty("email")
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    private String email;
 
     @JsonProperty("age")
-    public Integer getAge() {
-        return age;
-    }
+    private Integer age;
 
-    public void setAge(Integer age) {
-        this.age = age;
-    }
 
-    @Override
-    public String toString() {
-        return "User{name='" + name + "', email='" + email + "', age=" + age + '}';
-    }
+
+
 }
